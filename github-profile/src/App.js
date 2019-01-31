@@ -8,13 +8,15 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      username:"Check1"
+      username:"Check1",
+      selectedOption: null
     };
   }
 
 
   componentDidMount(){
     console.log("mounted")
+    
   }
 
   handleClick(){
@@ -24,11 +26,23 @@ class App extends Component {
      }
    )
   }
+  
+  //handleChange = (selectedOption) => {
+   // this.setState({ selectedOption });
+    //console.log(`Option selected:`, selectedOption);
+  //}
 
 
   render() {
     var style={fontSize:'40px'}
     //const array=["welcome","to","my","course"]
+    const options = [
+      { value: 'chocolate', label: 'Chocolate' },
+      { value: 'strawberry', label: 'Strawberry' },
+      { value: 'vanilla', label: 'Vanilla' }
+    ];
+    
+  
 
 
 
@@ -66,7 +80,7 @@ class App extends Component {
           this.state.username
         }
         <button onClick={this.handleClick.bind(this)}><NameComponent/> </button>
-        
+        checking the code 
         
       </p>
       </div>
