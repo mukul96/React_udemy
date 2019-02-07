@@ -9,28 +9,48 @@ class App extends Component {
     super(props)
     this.state={
       username:"Check1",
-      selectedOption: null
+      selectedOption: '',
+      jsonList:[]
     };
   }
 
 
   componentDidMount(){
     console.log("mounted")
+    fetch('http://www.json-generator.com/api/json/get/bVDxTQSDQO?indent=2',{
+      method:'GET'
+    })
+    .then(response => response.json())
+    .then(json=>{
+      console.log(json)
+      this.setState({
+        jsonList:json
+      })
+      
+    })
+    .catch(error=>{
+      console.log(error)
+    
+    });
+    
     
   }
 
   handleClick(){
-   this.setState(
+  
+    this.setState(
      {
        username:"check2"
      }
    )
   }
   
-  //handleChange = (selectedOption) => {
-   // this.setState({ selectedOption });
-    //console.log(`Option selected:`, selectedOption);
-  //}
+  handleChange (selectedOption) {
+
+   this.setState({ selectedOption: selectedOption ? selectedOption:' ' });
+   console.log(selectedOption)
+   console.log(`Option selected:`, selectedOption);
+    }
 
 
   render() {
@@ -80,13 +100,26 @@ class App extends Component {
           this.state.username
         }
         <button onClick={this.handleClick.bind(this)}><NameComponent/> </button>
-        checking the code 
+        checking the code this time at more watches
         
       </p>
+      <Select
+        value={this.state.selectedOption}
+        onChange={this.handleChange.bind(this)}
+        
+        options={options}
+      />
+      {this.state.jsonList.map(item =>{
+        return(
+          <p>{item.name}</p>
+        )
+      })}
       </div>
+
+      
      
       
-       
+          
     );
   }
 }
